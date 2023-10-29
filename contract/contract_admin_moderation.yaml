@@ -1,0 +1,153 @@
+# Модерация
+paths:
+    api/v1/offer:
+        get:
+            description: Позволяет получить оффер
+            headers:
+                required:
+                    - token
+                properties:
+                    token:
+                        type: string
+                        example: "token1234adcvf"
+                  
+            parameters:
+                required:
+                    - offer_id
+                properties:
+                    offer_id:
+                        type: string
+                        example: "offer_id1234asfjdsajf"
+            
+            responses:
+                '200':
+                    type: object
+                    required:
+                        - offer
+                    properties:
+                        offer:
+                            type: object
+                            required:
+                                - offer_id
+                                - book_name
+                                - genre_name
+                                - book_authors
+                                - city
+                                - updated_at
+                                - owner_name
+                                - status
+                                # - picture
+                                # - rating
+                            properties:
+                                offer_id:
+                                    description: id оффера
+                                    type: string
+                                    example: "offer_idasfsdf11234"
+                                book_name:
+                                    description: Название книги
+                                    type: string
+                                    example: "12 стульев"
+                                genre_name:
+                                    description: Жанр
+                                    type: string
+                                    example: "Классика"
+                                book_authors:
+                                    description: авторы книги
+                                    type: array
+                                    items:
+                                        type: string
+                                        example: "Гоголь"
+                                city:
+                                    type: string
+                                    example: Москва
+                                updated_at:
+                                    type: string
+                                    description: Дата и время последнего изменения
+                                owner_name:
+                                    type: string
+                                    description: Имя владельца оффера
+                                status:
+                                    type: string
+                                    description: В каком статусе находится заявка
+                                description:
+                                    type: string
+                                    example: "Описание ..."
+                '400':
+                    description: Некорректный id оффера
+
+                '404':
+                    description: Оффер не найден
+
+                '403':
+                    description: Пользователь не админ
+
+        post:
+            description: Позволяет изменить поля оффера
+            headers:
+                required:
+                    - token
+                properties:
+                    token:
+                        type: string
+                        example: "token1234adcvf"
+                  
+            parameters:
+                required:
+                    - offer_id
+                properties:
+                    offer_id:
+                        type: string
+                        example: "offer_id1234asfjdsajf"
+
+            requestBody:
+                description: Указываются поля и их новые значения
+                type: object
+                required:
+                    - offer
+                properties:
+                    offer:
+                        type: object
+                        required:
+                        properties:
+                            book_name:
+                                description: Название книги
+                                type: string
+                                example: "12 стульев"
+                            book_authors:
+                                description: авторы книги
+                                type: array
+                                items:
+                                    type: string
+                                    example: "Гоголь"
+                            city:
+                                type: string
+                                example: Москва
+                            status:
+                                type: string
+                                description: В каком статусе находится заявка
+                            description:
+                                type: string
+                                example: "Описание ..."
+            
+            responses:
+                '200':
+                    type: object
+                    required:
+                        - offer
+                    properties:
+                        offer:
+                            type: object
+                            required:
+                            properties:
+                                offer_id:
+                                    description: id оффера
+                                    type: string
+                                    example: "offer_idasfsdf11234"
+                '400':
+                    description: Некорректный id оффера
+
+                '404':
+                    description: Оффер не найден
+
+                '403':
+                    description: Пользователь не админ

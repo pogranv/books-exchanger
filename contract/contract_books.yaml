@@ -1,0 +1,192 @@
+# Книги
+paths:
+    api/v1/offers/by-genre:
+        get:
+            description: Позволяет получить книги по жанру
+            parameters:
+                required:
+                    - genre_id
+                properties:
+                    genre_id:
+                        type: string
+                        example: "genre_id1234asfjdsajf"
+
+            responses:
+                '200':
+                    type: object
+                    required:
+                        - genre_name
+                        - offers
+                    properties:
+                        genre_name:
+                            type: string
+                            example: "Классика"
+                        offers:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - offer_id
+                                    - book_name
+                                    - book_authors
+                                    - city
+                                    # - picture
+                                    # - rating
+                                properties:
+                                    offer_id:
+                                        description: id оффера
+                                        type: string
+                                        example: "offer_idasfsdf11234"
+                                    book_name:
+                                        description: Название книги
+                                        type: string
+                                        example: "12 стульев"
+                                    book_authors:
+                                        description: авторы книги
+                                        type: array
+                                        items:
+                                            type: string
+                                            example: "Гоголь"
+                                    city:
+                                        type: string
+                                        example: "Москва"
+
+                '400':
+                    description: Некорректный id жанра
+                    type: object
+                    required:
+                        - message
+                    properties:
+                        message:
+                            type: string
+
+                '404':
+                    description: Жанра не существует
+                    type: object
+                    required:
+                        - message
+                    properties:
+                        message:
+                            type: string
+
+
+    api/v1/offers/by-genre:
+        get:
+            description: Позволяет получить книги по жанру
+            parameters:
+                required:
+                    - genre_id
+                properties:
+                    genre_id:
+                        type: string
+                        example: "genre_id1234asfjdsajf"
+
+            responses:
+                '200':
+                    type: object
+                    required:
+                        - genre_name
+                        - offers
+                    properties:
+                        genre_name:
+                            type: string
+                            example: "Классика"
+                        offers:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - offer_id
+                                    - book_name
+                                    - book_authors
+                                    - city
+                                    # - picture
+                                    # - rating
+                                properties:
+                                    offer_id:
+                                        description: id оффера
+                                        type: string
+                                        example: "offer_idasfsdf11234"
+                                    book_name:
+                                        description: Название книги
+                                        type: string
+                                        example: "12 стульев"
+                                    book_authors:
+                                        description: авторы книги
+                                        type: array
+                                        items:
+                                            type: string
+                                            example: "Гоголь"
+                                    city:
+                                        type: string
+                                        example: "Москва"
+
+                '400':
+                    description: Некорректный id жанра
+                    type: object
+                    required:
+                        - message
+                    properties:
+                        message:
+                            type: string
+
+                '404':
+                    description: Жанра не существует
+                    type: object
+                    required:
+                        - message
+                    properties:
+                        message:
+                            type: string
+
+    admin/v1/offers:
+        get:
+            description: Позволяет получить неподтвержденные офферы
+            headers:
+                required:
+                    - token
+                properties:
+                    token:
+                        type: string
+                        example: "token1234adcvf"
+            responses:
+                '200':
+                    type: object
+                    required:
+                        - offers
+                    properties:
+                        offers:
+                            type: array
+                            items:
+                                type: object
+                                required:
+                                    - offer_id
+                                    - book_name
+                                    - book_authors
+                                    - city
+                                    # - picture
+                                    # - rating
+                                properties:
+                                    offer_id:
+                                        description: id оффера
+                                        type: string
+                                        example: "offer_idasfsdf11234"
+                                    book_name:
+                                        description: Название книги
+                                        type: string
+                                        example: "12 стульев"
+                                    book_authors:
+                                        description: авторы книги
+                                        type: array
+                                        items:
+                                            type: string
+                                            example: "Гоголь"
+                                    city:
+                                        type: string
+                                        example: Москва
+                                    description:
+                                        type: string
+                                        example: "Описание ..."
+
+                '403':
+                    description: Пользователь не админ
